@@ -17,6 +17,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -102,13 +103,28 @@ public class BookingService {
     }
 
     public void sendEmail(String toEmail, String candidateName, LocalDateTime time) {
+        if (toEmail == null || toEmail.isEmpty()) {
+            System.err.println("LOG: Email failed because recipient address is NULL!");
+            return;
+        }
+
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+
+            String formattedDate = time.format(formatter);
+
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("your-email@gmail.com");
+            message.setFrom("chamodrathnayaka008@gmail.com");
             message.setTo(toEmail);
-            message.setSubject("Interview Confirmation - ProHire");
-            message.setText("Hi " + candidateName + ",\n\nYour interview is scheduled for: " + time);
+            message.setSubject("INTERVIEW BOOKING - SYSTEM");
+            message.setText("Hi " + candidateName + ",\n\n" +
+                    "Your interview has been successfully scheduled.\n\n" +
+                    "Date & Time: " + formattedDate + "\n\n" +
+                    "Good luck with your interview!\n" +
+                    "Team ICET");
+
             mailSender.send(message);
+            System.out.println("LOG: Email successfully sent to: " + toEmail);
         } catch (Exception e) {
             System.err.println("Email failed: " + e.getMessage());
         }

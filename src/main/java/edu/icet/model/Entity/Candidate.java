@@ -14,4 +14,8 @@ public class Candidate {
     private Long id;
     private String name;
     private String email;
+    private String idNumber;
+    private String contactNumber;
+    private String specialization;
+    private String cvPath;
 }

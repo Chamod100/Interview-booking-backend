@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 public class SlotDTO {
     private Long id;
     private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Long interviewerId;
     private String interviewerName;
     private boolean isBooked;
 }
