@@ -8,7 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
   mail:
     host: smtp.gmail.com
@@ -21,6 +21,10 @@ spring:
           auth: true
           starttls:
             enable: true
+
+
+  jackson:
+    time-zone: Asia/Colombo
 
   servlet:
     multipart:
